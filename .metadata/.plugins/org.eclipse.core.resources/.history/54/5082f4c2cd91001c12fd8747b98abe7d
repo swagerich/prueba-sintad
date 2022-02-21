@@ -1,0 +1,92 @@
+package com.sintad.exam.controller;
+
+import java.util.List;
+
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.exception.NotFoundExpcetion;
+
+import com.sintad.exam.models.Entidad;
+import com.sintad.exam.repository.ContribuyenteRepository;
+import com.sintad.exam.repository.DocumentoRepository;
+import com.sintad.exam.repository.EntidadRepository;
+
+@RestController
+@RequestMapping("/api")
+public class EntidadController {
+
+	private ContribuyenteRepository contribuyenteRepo;
+	private DocumentoRepository documentoRepo;
+	private EntidadRepository entidadRepo;
+
+	public EntidadController(ContribuyenteRepository contribuyenteRepo, DocumentoRepository documentoRepo,
+			EntidadRepository entidadRepo) {
+		this.contribuyenteRepo = contribuyenteRepo;
+		this.documentoRepo = documentoRepo;
+		this.entidadRepo = entidadRepo;
+	}
+
+	// LISTAMOS TODAS LAS ENTIDADES
+	@GetMapping("/entidad")
+	public List<Entidad> getAllEntidades() {
+		return entidadRepo.findAll();
+	}
+
+	// LISTAMOS DOCUMENTOS CON LA ENTIDAD
+	@GetMapping("/documentos/{documentoId}/entidad")
+	public Entidad getEntidadByDocumentoId(@PathVariable int documentoId) {
+
+		if (!documentoRepo.existsById(documentoId)) {
+			throw new NotFoundExpcetion("Documento not encontrado!");
+		}
+
+		List<Entidad> entidades = entidadRepo.findByDocumentoId(documentoId);
+		if (entidades.size() > 0) {
+			return entidades.get(0);
+		} else {
+			throw new NotFoundExpcetion("Entidad no encontrada!");
+		}
+	}
+
+	// AGREGAMOS DOCUMENTOS CON ID E ENTIDADES
+	@PostMapping("/documentos/{documentoId}/entidades")
+	public Entidad createEntidad(@PathVariable int documentoId, @RequestBody Entidad entidad) {
+		return documentoRepo.findById(documentoId).map(documento -> {
+			entidad.setDocumento(documento);
+			return entidadRepo.save(entidad);
+		}).orElseThrow(() -> new NotFoundExpcetion("Documento no encontrado!"));
+	}
+
+	// HACE UN UPDATE A LAS ENTIDADES
+	@PutMapping("/entidades/{entidadId}")
+	public Entidad updateEntidad(@PathVariable int entidadId, @RequestBody Entidad upEntidad) {
+		return entidadRepo.findById(entidadId).map(entidad -> {
+			entidad.setNroDocumento(upEntidad.getNroDocumento());
+			entidad.setRazonSocial(upEntidad.getRazonSocial());
+			entidad.setNombreComercial(upEntidad.getNombreComercial());
+			entidad.setDireccion(upEntidad.getDireccion());
+			entidad.setTelefono(upEntidad.getTelefono());
+			entidad.setEstado(upEntidad.getEstado());
+			return entidadRepo.save(entidad);
+		}).orElseThrow(() -> new NotFoundExpcetion("Entidad no encontrado"));
+	}
+	
+	@DeleteMapping("/entidades/{entidadId}")
+	public String deleteEntidad(@PathVariable int entidadId) {
+		
+		return entidadRepo.findById(entidadId).map(entidad ->{
+			entidadRepo.delete(entidad);
+			return "Entidad eliminada con exito";
+		}).orElseThrow(()-> new NotFoundExpcetion("Entidad no encontrada!"));
+	}
+
+}

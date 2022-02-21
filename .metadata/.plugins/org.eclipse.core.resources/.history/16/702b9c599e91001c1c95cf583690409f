@@ -1,0 +1,28 @@
+package com.sintad.exam.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.models.TipoDocumento;
+import com.sintad.exam.repository.DocumentoRepository;
+
+@RestController
+@RequestMapping("/api")
+public class DocumentoController {
+	
+	
+	private DocumentoRepository documentoRepo;
+
+	public DocumentoController(DocumentoRepository documentoRepo) {
+		this.documentoRepo = documentoRepo;
+	}
+		
+	@GetMapping("/documentos")
+	public List<TipoDocumento> getAllTDocumentos{
+		
+	}
+	
+}

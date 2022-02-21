@@ -1,0 +1,75 @@
+package com.sintad.exam.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.exception.NotFoundExpcetion;
+import com.sintad.exam.models.TipoContribuyente;
+
+import com.sintad.exam.repository.ContribuyenteRepository;
+
+@RestController
+@RequestMapping("/api")
+public class ContribuyenteController {
+	
+	private ContribuyenteRepository contribuyenteRepo;
+
+	public ContribuyenteController(ContribuyenteRepository contribuyenteRepo) {
+		this.contribuyenteRepo = contribuyenteRepo;
+	}
+	
+	
+	
+	@GetMapping("/contribuyente")
+	public List<TipoContribuyente> getAllContribuyents(){
+		return contribuyenteRepo.findAll();
+	}
+	
+	
+	@GetMapping("/contribuyente/{id}")
+	public TipoContribuyente getTContribuyenteById(@PathVariable int id) {
+		Optional<TipoContribuyente> opTipo = contribuyenteRepo.findById(id);
+		if(opTipo.isPresent()) {
+			return opTipo.get();
+		}else {
+			throw new NotFoundExpcetion("Documentos no encontrado por el id" + id);
+		}
+
+	}
+
+	@PostMapping("/contribuyente")
+	public TipoContribuyente createTContribuyente(@RequestBody TipoContribuyente contribuyente) {
+		return  contribuyenteRepo.save(contribuyente);
+	}
+	
+	@PutMapping("/contribuyente/{id}")
+	public  TipoContribuyente updateTContribuyente(@PathVariable int id, @RequestBody TipoContribuyente upContribuyente) {
+		return contribuyenteRepo.findById(id).map(contribuyente ->{
+			contribuyente.setNombre(upContribuyente.getNombre());
+			contribuyente.setEstado(upContribuyente.getEstado());
+			return contribuyenteRepo.save(contribuyente);
+		}).orElseThrow(()-> new NotFoundExpcetion("Contribuyente no encontrado por el id" + id));
+		
+	}
+	
+		@DeleteMapping("/contribuyente/{id}")
+		public void deleteContribuyente(@PathVariable int id) {
+			  contribuyenteRepo.deleteById(id);
+		}
+	}
+	
+	
+	
+	
+	
+}

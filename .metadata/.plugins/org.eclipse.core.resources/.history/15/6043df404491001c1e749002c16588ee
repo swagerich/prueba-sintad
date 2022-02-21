@@ -1,0 +1,100 @@
+package com.sintad.exam.models;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_tipo_contribuyente")
+public class TipoContribuyente {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(length = 11)
+	private int id;
+	@Column(length = 50)
+	private String nombre;
+
+	private Boolean estado;
+
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "id_tipo_contribuyente",insertable = false,updatable =
+	 * false) private Entidad entidadc;
+	 */
+
+	/*
+	 * @OneToMany(mappedBy = "documentos",fetch = FetchType.LAZY, cascade
+	 * =CascadeType.ALL) private List<Entidad> entidadc;
+	 */
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	  @JoinColumn(name = "id_tipo_contribuyente", referencedColumnName = "id") 
+	  private Entidad entidadc;
+	
+	@OneToOne(mappedBy ="contribuyente",fetch = FetchType.LAZY, cascade=CascadeType.ALL )
+	private Entidad entidad;
+	
+
+	
+	public TipoContribuyente(String nombre, Boolean estado, Entidad entidad) {
+		this.nombre = nombre;
+		this.estado = estado;
+		this.entidad = entidad;
+	}
+
+	
+	public TipoContribuyente() {
+	
+	}
+
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+	/*
+	 * public Entidad getEntidadc() { return entidadc; }
+	 * 
+	 * public void setEntidadc(Entidad entidadc) { this.entidadc = entidadc; }
+	 */
+	
+
+}

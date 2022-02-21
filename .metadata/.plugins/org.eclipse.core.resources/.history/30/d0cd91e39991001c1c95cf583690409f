@@ -1,0 +1,5 @@
+package com.sintad.exam.exception;
+
+public class NoFoundExpcetion {
+
+}

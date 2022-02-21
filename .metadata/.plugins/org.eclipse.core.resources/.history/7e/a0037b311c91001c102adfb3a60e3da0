@@ -1,0 +1,108 @@
+package com.sintad.exam.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_tipo_documento")
+public class TipoDocumento {
+
+	@Id
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Column(name = "id_tipo_documento", length = 11)
+	private int id;
+
+	@Column(length = 20)
+	private String codigo;
+
+	@Column(length = 100)
+	private String nombre;
+
+	@Column(length = 200)
+	private String descripcion;
+
+	private Boolean estado;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tipodocumento_id",insertable =false, updatable =false)
+	private Entidad entidad;
+
+	
+	public TipoDocumento() {
+		
+		
+	}
+	
+
+
+	public TipoDocumento(String codigo, String nombre, String descripcion, Boolean estado, Entidad entidad) {
+
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.estado = estado;
+		this.entidad = entidad;
+	}
+
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+	public Entidad getEntidad() {
+		return entidad;
+	}
+
+	public void setEntidad(Entidad entidad) {
+		this.entidad = entidad;
+	}
+
+}

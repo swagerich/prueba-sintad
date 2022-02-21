@@ -1,0 +1,12 @@
+spring.datasource.url=jdbc:mysql://localhost/ejemplo?useSSL=false
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+#spring.jpa.generate-ddl=false
+#spring.jpa.show-sql=true
+#crea  y dropea las tablas solo se usa para desarrollador
+spring.jpa.hibernate.ddl-auto=create-drop
+
+#mostramos slq nativas por debajo
+logging.level.org.hibernate.SQL=debug

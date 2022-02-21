@@ -1,0 +1,16 @@
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 4, 'CARNET DE EXTRANJERIA', 'CARNET DE EXTRANJERIA', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 7, 'PASAPORTE', 'PASAPORTE', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 11, 'PARTIDA DE NACIMIENTO - IDENTIDAD', 'PARTIDA DE NACIMIENTO - IDENTIDAD', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 99, 'OTROS', 'OTROS', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 6, 'RUC', 'REGISTRO UNICO DEL CONTRIBUYENTE', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 1, 'DNI', 'DOCUMENTO NACIONAL DE IDENTIDAD', 1);
+
+
+
+
+
+
+
+
+
+INSERT INTO tb_entidad (nro_documento,razon_social,nombre_comercial,direccion,telefono,estado) VALUES (2, 20505327552, 'SYL S.A.C', 'SYL CARGO NOMBRE COMERCIAL', 'Jr. Comandante Jimenez Nro. 166 Int. a (entre Cuadra 7 y 8 Javier Padro Oeste)', '79845612', 1);

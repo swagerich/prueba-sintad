@@ -1,0 +1,4 @@
+INSERT INTO tb_tipo_contribuyente(nombre,estado) VALUES ('Natural Sin Negocio', 1);
+INSERT INTO tb_tipo_contribuyente(nombre,estado) VALUES ('Juridica', 1);
+INSERT INTO tb_tipo_contribuyente(nombre,estado) VALUES ('Natural Con Negocio', 1);
+INSERT INTO tb_tipo_contribuyente(nombre,estado) VALUES ('No Domiciliado', 1);

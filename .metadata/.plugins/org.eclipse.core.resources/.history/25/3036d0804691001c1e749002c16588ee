@@ -1,0 +1,5 @@
+package com.sintad.exam.repository;
+
+public interface ContribuyenteRepository {
+
+}

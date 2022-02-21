@@ -1,0 +1,76 @@
+package com.sintad.exam.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.exception.NotFoundExpcetion;
+import com.sintad.exam.models.TipoDocumento;
+import com.sintad.exam.repository.DocumentoRepository;
+
+@RestController
+@RequestMapping("/api")
+public class DocumentoController {
+	
+	
+	private DocumentoRepository documentoRepo;
+
+	public DocumentoController(DocumentoRepository documentoRepo) {
+		this.documentoRepo = documentoRepo;
+	}
+		
+	
+	
+	@GetMapping("/documento")
+	public List<TipoDocumento> getAllTDocumentos(){
+		return documentoRepo.findAll();
+	}
+	
+	@GetMapping("/documento/{id}")
+	public TipoDocumento getTDocumentoById(@PathVariable int id) {
+		Optional<TipoDocumento> tDocument = documentoRepo.findById(id);
+		if(tDocument.isPresent()) {
+			return tDocument.get();
+		}else {
+			throw new NotFoundExpcetion("Documentos por id no encontrado"+id);
+		}
+		
+	}
+	
+	@PostMapping("/documento")
+	public TipoDocumento createTDocumento(@RequestBody TipoDocumento document) {
+		return documentoRepo.save(document);
+		
+	}
+	
+	@PutMapping("/documento/{id}")
+	public TipoDocumento updateTDocumento(@PathVariable int id,@RequestBody TipoDocumento updocument) {
+		
+		return documentoRepo.findById(id).map(documento-> {
+			documento.setCodigo(updocument.getCodigo());
+			documento.setNombre(updocument.getNombre());
+			documento.setDescripcion(updocument.getDescripcion());
+			documento.setEstado(updocument.getEstado());
+			return documentoRepo.save(documento);
+		}).orElseThrow(()-> new NotFoundExpcetion("Documento no encontrado por id" + id));
+		
+	}
+	
+	@DeleteMapping("/documento/{id}")
+	public String deleteTDocumento(@PathVariable int id) {
+		return documentoRepo.findById(id).map(documento ->{
+			documentoRepo.delete(documento);
+			return " Eliminado Documento con exito";
+		}).orElseThrow(() -> new NotFoundExpcetion("No fue encontrado Documento por id"));
+	}
+	
+	
+}

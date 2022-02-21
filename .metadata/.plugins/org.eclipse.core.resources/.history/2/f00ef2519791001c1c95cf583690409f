@@ -1,0 +1,16 @@
+package com.sintad.exam.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.repository.ContribuyenteRepository;
+
+@RestController
+@RequestMapping("/api")
+public class ContribuyenteController {
+	
+	private ContribuyenteRepository contribuyenteRepo;
+	
+	
+
+}

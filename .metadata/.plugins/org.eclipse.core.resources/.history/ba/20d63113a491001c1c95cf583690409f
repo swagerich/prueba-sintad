@@ -1,0 +1,30 @@
+package com.sintad.exam.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.repository.ContribuyenteRepository;
+import com.sintad.exam.repository.DocumentoRepository;
+import com.sintad.exam.repository.EntidadRepository;
+
+@RestController
+@RequestMapping("/api")
+public class EntidadController {
+	
+	
+	private ContribuyenteRepository contribuyenteRepo;
+	private DocumentoRepository documentoRepo;
+	private EntidadRepository entidadRepo;
+	
+	public EntidadController(ContribuyenteRepository contribuyenteRepo, DocumentoRepository documentoRepo,
+			EntidadRepository entidadRepo) {
+		this.contribuyenteRepo = contribuyenteRepo;
+		this.documentoRepo = documentoRepo;
+		this.entidadRepo = entidadRepo;
+	}
+	
+	
+	
+	
+
+}

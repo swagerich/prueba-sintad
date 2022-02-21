@@ -1,0 +1,51 @@
+package com.sintad.exam.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sintad.exam.exception.NotFoundExpcetion;
+import com.sintad.exam.models.Entidad;
+import com.sintad.exam.repository.ContribuyenteRepository;
+import com.sintad.exam.repository.DocumentoRepository;
+import com.sintad.exam.repository.EntidadRepository;
+
+@RestController
+@RequestMapping("/api")
+public class EntidadController {
+	
+	
+	private ContribuyenteRepository contribuyenteRepo;
+	private DocumentoRepository documentoRepo;
+	private EntidadRepository entidadRepo;
+	
+	public EntidadController(ContribuyenteRepository contribuyenteRepo, DocumentoRepository documentoRepo,
+			EntidadRepository entidadRepo) {
+		this.contribuyenteRepo = contribuyenteRepo;
+		this.documentoRepo = documentoRepo;
+		this.entidadRepo = entidadRepo;
+	}
+	
+	@GetMapping("/documentos/{documentoId}/entidad")
+	public Entidad getEntidadByDocumentoId(@PathVariable int documentoId) {
+		
+		if(!documentoRepo.existsById(documentoId)) {
+			throw new NotFoundExpcetion("Documento not encontrado!");
+		}
+		//===============================================================
+		List<Entidad> entidades = entidadRepo.findByIdEntidad(documentoId);
+		if(entidades.size() > 0) {
+			return entidades.get(0);
+		}else {
+			throw new NotFoundExpcetion("Entidad no encontrada!");
+		}
+	}
+	
+	
+	
+
+}

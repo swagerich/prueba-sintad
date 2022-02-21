@@ -1,0 +1,57 @@
+package com.sintad.exam.models;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_entidad")
+public class Entidad {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(name = "nro_documento",length = 25)
+	private int nroDocumento;
+	@Column(name="razon_social",length = 100)
+	private String razonSocial;
+	@Column(name="nombre_comercial",length = 100)
+	private String nombreComercial;
+	@Column(length = 250)
+	private String direccion;
+	@Column(length = 50)
+	private String telefono;
+	
+	private Boolean estado;
+	
+	//id contribuyyebte
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entidad",cascade = CascadeType.ALL)
+	private List<TipoContribuyente> contribuyente;
+	//id documento
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="entidad", cascade = CascadeType.ALL)
+	private List<TipoDocumento> documento;
+	
+	
+	public Entidad() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

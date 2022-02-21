@@ -1,0 +1,25 @@
+INSERT INTO tb_tipo_contribuyente (nombre,estado) VALUES ('Natural Sin Negocio', 1);
+INSERT INTO tb_tipo_contribuyente (nombre,estado) VALUES ('Juridica', 1);
+INSERT INTO tb_tipo_contribuyente (nombre,estado) VALUES ('Natural Con Negocio', 1);
+INSERT INTO tb_tipo_contribuyente (nombre,estado) VALUES ('No Domiciliado', 1);
+
+
+
+
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 4, 'CARNET DE EXTRANJERIA', 'CARNET DE EXTRANJERIA', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 7, 'PASAPORTE', 'PASAPORTE', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 11, 'PARTIDA DE NACIMIENTO - IDENTIDAD', 'PARTIDA DE NACIMIENTO - IDENTIDAD', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 99, 'OTROS', 'OTROS', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 6, 'RUC', 'REGISTRO UNICO DEL CONTRIBUYENTE', 1);
+INSERT INTO tb_tipo_documento (codigo,nombre,descripcion,estado) VALUES ( 1, 'DNI', 'DOCUMENTO NACIONAL DE IDENTIDAD', 1);
+
+
+
+
+
+
+
+
+
+
+

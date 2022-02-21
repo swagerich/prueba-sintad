@@ -1,0 +1,153 @@
+package com.sintad.exam.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_entidad")
+public class Entidad {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_entidad",length = 11)
+	private int id;
+	@Column(name = "nro_documento",length = 25)
+	private int nroDocumento;
+	@Column(name="razon_social",length = 100)
+	private String razonSocial;
+	@Column(name="nombre_comercial",length = 100)
+	private String nombreComercial;
+	@Column(length = 250)
+	private String direccion;
+	@Column(length = 50)
+	private String telefono;
+	
+	private Boolean estado;
+	
+	//id contribuyyebte
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entidad",cascade = CascadeType.ALL)
+	private List<TipoContribuyente> contribuyente;
+	//id documento
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="entidad", cascade = CascadeType.ALL)
+	private List<TipoDocumento> documento;
+	
+	
+	public Entidad() {
+		contribuyente = new ArrayList<>();
+		documento = new ArrayList<>();
+	}
+
+	
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getNroDocumento() {
+		return nroDocumento;
+	}
+
+
+	public void setNroDocumento(int nroDocumento) {
+		this.nroDocumento = nroDocumento;
+	}
+
+
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+
+	public String getNombreComercial() {
+		return nombreComercial;
+	}
+
+
+	public void setNombreComercial(String nombreComercial) {
+		this.nombreComercial = nombreComercial;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+
+	public List<TipoContribuyente> getContribuyente() {
+		return contribuyente;
+	}
+
+
+	public void setContribuyente(List<TipoContribuyente> contribuyente) {
+		this.contribuyente = contribuyente;
+	}
+
+
+	public List<TipoDocumento> getDocumento() {
+		return documento;
+	}
+
+
+	public void setDocumento(List<TipoDocumento> documento) {
+		this.documento = documento;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
